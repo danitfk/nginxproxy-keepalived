@@ -1,0 +1,5 @@
+---
+- hosts: production
+  become: yes
+  roles:
+    - { role: nginxproxy-keepalived }
