@@ -1,0 +1,3 @@
+[production]
+nginxproxy1-CAFE host_weight=254 type=master
+nginxproxy2-CAFE host_weight=100 type=slave

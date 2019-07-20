@@ -1,0 +1,39 @@
+global_defs {
+   notification_email {
+	{% for email in admin_emails %}
+        {{ email }}
+        {% endfor %}
+
+   }
+   notification_email_from {{ hostname }}
+   smtp_server localhost
+   smtp_connect_timeout 30
+}
+
+vrrp_script chk_nginx {
+    script "pgrep nginx"
+    interval 2
+}
+vrrp_instance VI_1 {
+    {% if 'type' is sameas 'master' %}
+    state MASTER
+    {% else %}
+    state BACKUP
+    {% endif %}
+    interface {{ ifname }}
+    virtual_router_id 101
+    priority {{ host_weight }}
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass {{ auth_pass }}
+    }
+    virtual_ipaddress {
+        {{ float_ip }}
+    }
+
+    track_script {
+       chk_nginx
+    }
+}
+

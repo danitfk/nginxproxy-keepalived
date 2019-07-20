@@ -1,0 +1,18 @@
+--- 
+  - name: Check if any keepalived installed before
+    stat: path=/usr/sbin/keepalived
+    register: keepalived_installed
+
+  - name: Check if any nginx installed before
+    stat: path=/usr/sbin/nginx
+    register: nginx_installed
+
+  - include: install_keepalived.yml
+    when: not keepalived_installed.stat.exists
+
+  - include: install_nginx.yml
+    when: not nginx_installed.stat.exists
+
+  - include: configure_keepalived.yml
+
+  - include: configure_nginx.yml

@@ -1,0 +1,9 @@
+---
+# defaults file for keepalived
+hostname: mail.hezardastan.net
+notification_email_from: gordi@hezardastan.net
+float_ip: 172.20.10.111
+auth_pass: 1234
+ifname: ens192
+admin_emails: [admin@cafebazaar.ir, gordi@hezardastan.net]
+backend: http://127.0.0.1

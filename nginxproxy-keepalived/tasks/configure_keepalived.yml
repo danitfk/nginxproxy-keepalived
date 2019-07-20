@@ -1,0 +1,6 @@
+- name: Generate keepalived configuration file
+  template: src=keepalived.conf.j2 dest=/etc/keepalived/keepalived.conf
+
+- name: Reload keepalived service
+  service: name=keepalived state=restarted
+

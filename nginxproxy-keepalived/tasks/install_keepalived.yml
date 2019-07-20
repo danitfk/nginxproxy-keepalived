@@ -1,0 +1,6 @@
+- name: Install keepavlied service
+  apt: name=keepalived state=present
+
+- name: Enable keepalived service
+  service: name=keepalived enabled=yes
+
